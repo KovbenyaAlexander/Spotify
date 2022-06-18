@@ -5,9 +5,7 @@ import { getTokens } from "../redux/thunk";
 const Dashboard = () => {
   const code = useSelector((state) => state.code);
   const dispatch = useDispatch();
-  console.log(`++`);
-
-  dispatch(getTokens);
+  dispatch(getTokens());
 
   return (
     <div>

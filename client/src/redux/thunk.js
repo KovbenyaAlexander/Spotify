@@ -2,11 +2,14 @@ import axios from "axios";
 
 export const getTokens = () => {
   return (dispatch, getState) => {
-    console.log(`thunk`);
-
     const code = getState().code;
-    axios.get("http://localhost:3333/login", { code }).then((res) => {
-      console.log(res.data);
-    });
+    axios
+      .post("http://localhost:3333/login", { code })
+      .then((res) => {
+        dispatch({ type: "SET_TOKENS", payload: res.data });
+      })
+      .catch((err) => {
+        window.location = "/";
+      });
   };
 };
