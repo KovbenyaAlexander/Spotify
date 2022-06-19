@@ -12,7 +12,7 @@ export default function reducer(state = initialState, action) {
     case "LOGIN":
       return { ...state, code: action.code };
     case "SET_TOKENS":
-      return { ...state, tokens: action.payload };
+      return { ...state, tokens: { ...state.tokens, ...action.payload } };
     default:
       return state;
   }
