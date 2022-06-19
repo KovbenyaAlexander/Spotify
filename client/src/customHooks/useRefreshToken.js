@@ -8,12 +8,23 @@ const useRefreshToken = () => {
   const expiresIn = useSelector((state) => state.tokens.expiresIn);
 
   useEffect(() => {
-    const timeout = setTimeout(() => {
-      axios.post("http://localhost:333/refresh", refreshToken).then((res) => {
-        dispatch({ type: "SET_TOKENS", payload: res.data.accessToken });
-      });
+    if (!refreshToken) return;
+    const interval = setInterval(() => {
+      axios
+        .post("http://localhost:3333/refresh", { refreshToken })
+        .then((res) => {
+          console.log(res);
 
-      return () => clearTimeout(timeout);
+          dispatch({
+            type: "SET_TOKENS",
+            payload: {
+              accessToken: res.data.accessToken,
+              expiresIn: res.data.expiresIn,
+            },
+          });
+        });
+
+      return () => clearInterval(interval);
     }, (expiresIn - 120) * 1000);
   }, [refreshToken, expiresIn]);
 };

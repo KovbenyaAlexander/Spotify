@@ -19,6 +19,10 @@ app.post("/refresh", (req, res) => {
 
   spotifyApi.refreshAccessToken().then((data) => {
     console.log(data.body);
+    res.json({
+      accessToken: data.body.access_token,
+      expiresIn: data.body.expires_in,
+    });
   });
 });
 

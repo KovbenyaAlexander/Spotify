@@ -1,18 +1,14 @@
 import React from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { getTokens } from "../redux/thunk";
+import useRefreshToken from "../customHooks/useRefreshToken";
 
 const Dashboard = () => {
-  const code = useSelector((state) => state.code);
   const dispatch = useDispatch();
   dispatch(getTokens());
+  useRefreshToken();
 
-  return (
-    <div>
-      Dashboard
-      {code}
-    </div>
-  );
+  return <div>Dashboard</div>;
 };
 
-export default Dashboard;
+export default React.memo(Dashboard);
