@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getTokens } from "../redux/thunk";
 import useRefreshToken from "../customHooks/useRefreshToken";
+import TrackList from "./TrackList";
 
 const Dashboard = () => {
   const dispatch = useDispatch();
@@ -19,21 +20,16 @@ const Dashboard = () => {
 
   useEffect(() => {
     if (!accessToken) return;
-    SpotifyAPI.setAccessToken(accessToken);
-  }, [accessToken]);
-
-  useEffect(() => {
-    if (!accessToken) return;
-
+    if (!searchText) return;
     SpotifyAPI.searchTracks(searchText).then((res) => {
-      console.log(res);
       setSearchResults(res.body.tracks.items);
     });
-  }, [searchText]);
+  }, [searchText, accessToken, SpotifyAPI]);
 
   return (
     <div>
       <input value={searchText} onChange={handleSearch}></input>
+      <TrackList tracks={searchResults} />
     </div>
   );
 };
