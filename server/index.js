@@ -8,6 +8,20 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
+app.post("/refresh", (req, res) => {
+  const refreshToken = req.body.refreshToken;
+  const spotifyApi = new SpotifyAPI({
+    clientId: "79daaec6f4e74079b6ab2038dd0d8508",
+    clientSecret: "a1586374f72b450fa8edf8a6006288c6",
+    redirectUri: "http://localhost:3000",
+    refreshToken,
+  });
+
+  spotifyApi.refreshAccessToken().then((data) => {
+    console.log(data.body);
+  });
+});
+
 app.post("/login", (req, res) => {
   const code = req.body.code;
   const spotifyApi = new SpotifyAPI({
