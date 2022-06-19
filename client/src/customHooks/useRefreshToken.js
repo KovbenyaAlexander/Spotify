@@ -9,6 +9,7 @@ const useRefreshToken = () => {
 
   useEffect(() => {
     if (!refreshToken) return;
+
     const interval = setInterval(() => {
       axios
         .post("http://localhost:3333/refresh", { refreshToken })
