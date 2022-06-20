@@ -6,6 +6,8 @@ export default function reducer(state = initialState, action) {
       return { ...state, code: action.code };
     case "SET_TOKENS":
       return { ...state, tokens: { ...state.tokens, ...action.payload } };
+    case "SET_CURRENT_TRACK_URI":
+      return { ...state, currentTrackUri: action.payload };
     default:
       return state;
   }

@@ -27,6 +27,7 @@ app.post("/refresh", (req, res) => {
 });
 
 app.post("/login", (req, res) => {
+  console.log(`Login`);
   const code = req.body.code;
   const spotifyApi = new SpotifyAPI({
     clientId: "79daaec6f4e74079b6ab2038dd0d8508",

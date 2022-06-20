@@ -5,6 +5,7 @@ const SpotifyAPI = new SpotifyWebApi();
 export const initialState = {
   code: "",
   SpotifyAPI,
+  currentTrackUri: "",
   tokens: {
     accessToken: "",
     refreshToken: "",
